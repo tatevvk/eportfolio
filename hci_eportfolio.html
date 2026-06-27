@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HCI ePortfolio — Your Name</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal-darkest: #04342C;
+    --teal-dark:    #085041;
+    --teal-mid:     #0F6E56;
+    --teal-base:    #1D9E75;
+    --teal-light:   #5DCAA5;
+    --teal-pale:    #9FE1CB;
+    --teal-bg:      #E1F5EE;
+    --text-primary: #1a1a1a;
+    --text-secondary: #555;
+    --text-tertiary: #888;
+    --border: rgba(0,0,0,0.08);
+    --bg-page: #F5F7F6;
+    --bg-card: #ffffff;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-primary);
+    background: var(--bg-page);
+  }
+
+  /* ── Navigation ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--teal-dark);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .nav-name { color: #fff; font-size: 14px; font-weight: 500; letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-links a {
+    color: rgba(255,255,255,0.8);
+    font-size: 12.5px;
+    padding: 6px 10px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-links a:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, var(--teal-darkest) 0%, var(--teal-dark) 50%, var(--teal-mid) 100%);
+    padding: 60px 2.5rem 52px;
+    display: flex; align-items: center; gap: 2rem;
+  }
+  .hero-avatar {
+    width: 88px; height: 88px; border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; font-weight: 600; color: #fff;
+    flex-shrink: 0; letter-spacing: 0.02em;
+  }
+  .hero-text h1 { font-size: 28px; font-weight: 600; color: #fff; margin-bottom: 6px; }
+  .hero-text p { font-size: 14px; color: rgba(255,255,255,0.78); line-height: 1.65; max-width: 500px; }
+  .hero-badge {
+    display: inline-block; margin-top: 12px;
+    background: rgba(255,255,255,0.13);
+    border: 0.5px solid rgba(255,255,255,0.28);
+    color: rgba(255,255,255,0.88);
+    font-size: 12px; padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  /* ── Layout ── */
+  .content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  section { padding-top: 48px; }
+
+  .section-eyebrow {
+    font-size: 10.5px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--teal-base); margin-bottom: 4px;
+  }
+  .section-heading {
+    font-size: 20px; font-weight: 600;
+    color: var(--text-primary);
+    display: flex; align-items: center; gap: 8px;
+    padding-bottom: 12px; margin-bottom: 18px;
+    border-bottom: 2px solid var(--teal-base);
+  }
+  .section-heading svg { color: var(--teal-base); }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  /* ── Bio ── */
+  .bio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .info-row { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 13.5px; }
+  .info-row svg { color: var(--teal-base); flex-shrink: 0; }
+  .info-label { color: var(--text-secondary); min-width: 74px; font-size: 13px; }
+  .info-val a { color: var(--teal-mid); text-decoration: none; }
+  .info-val a:hover { text-decoration: underline; }
+
+  /* ── Resume ── */
+  .resume-block { margin-bottom: 16px; }
+  .resume-block h4 {
+    font-size: 13px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.07em;
+    color: var(--teal-mid); margin-bottom: 8px;
+  }
+  .resume-row {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 8px 0; border-bottom: 0.5px solid var(--border);
+    font-size: 13.5px; gap: 12px;
+  }
+  .resume-row:last-child { border-bottom: none; }
+  .resume-title { font-weight: 500; }
+  .resume-org { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+  .resume-date { font-size: 12px; color: var(--text-tertiary); white-space: nowrap; margin-top: 3px; }
+
+  /* ── Tags ── */
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .tag {
+    font-size: 11.5px;
+    background: var(--teal-bg); color: var(--teal-dark);
+    padding: 3px 9px; border-radius: 20px;
+    font-weight: 500;
+  }
+
+  /* ── Marquee ── */
+  .marquee-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .marquee-card {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-top: 3px solid var(--teal-base);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    padding: 1rem 1.1rem;
+  }
+  .marquee-num { font-size: 10.5px; font-weight: 600; color: var(--teal-mid); letter-spacing: 0.08em; margin-bottom: 4px; }
+  .marquee-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .marquee-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+  .marquee-full { grid-column: 1 / -1; }
+
+  /* ── Capstone ── */
+  .capstone-highlight {
+    background: var(--teal-bg);
+    border: 0.5px solid var(--teal-pale);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 12px;
+  }
+  .capstone-highlight h4 { font-size: 15px; font-weight: 600; color: var(--teal-darkest); margin-bottom: 6px; }
+  .capstone-highlight p { font-size: 13.5px; color: var(--teal-dark); line-height: 1.65; }
+  .capstone-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px; }
+  .meta-item label { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-tertiary); margin-bottom: 3px; }
+  .meta-item span { font-size: 14px; font-weight: 500; }
+
+  /* ── Program Plan ── */
+  .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .plan-term {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 0.9rem 1rem;
+  }
+  .plan-term.final { border-color: var(--teal-light); border-width: 1px; }
+  .plan-term-label { font-size: 12px; font-weight: 600; color: var(--teal-mid); margin-bottom: 8px; }
+  .plan-course { font-size: 12.5px; color: var(--text-secondary); padding: 5px 0; border-bottom: 0.5px solid var(--border); }
+  .plan-course:last-child { border-bottom: none; }
+
+  /* ── Practicum ── */
+  .practicum-card { display: flex; gap: 14px; align-items: flex-start; }
+  .prac-icon {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--teal-bg);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .prac-icon svg { color: var(--teal-mid); }
+  .prac-meta { font-size: 12px; color: var(--text-tertiary); margin: 3px 0 8px; }
+
+  /* ── Social Justice ── */
+  .sj-card {
+    border-left: 3px solid var(--teal-base);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+  }
+  .sj-badge {
+    background: var(--teal-bg); border-radius: var(--radius-md);
+    padding: 10px 14px; text-align: center; flex-shrink: 0;
+  }
+  .sj-badge .check { font-size: 22px; color: var(--teal-mid); }
+  .sj-badge span { display: block; font-size: 10.5px; color: var(--teal-dark); font-weight: 600; white-space: nowrap; }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--teal-darkest);
+    padding: 22px 2rem;
+    text-align: center;
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.55);
+  }
+  footer strong { color: rgba(255,255,255,0.88); font-weight: 500; }
+
+  @media (max-width: 640px) {
+    .bio-grid, .marquee-grid, .plan-grid, .capstone-meta { grid-template-columns: 1fr; }
+    .marquee-full { grid-column: auto; }
+    .hero { flex-direction: column; align-items: flex-start; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav>
+  <span class="nav-name">Your Name &middot; HCI ePortfolio</span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#resume">Resume</a>
+    <a href="#marquee">Assignments</a>
+    <a href="#capstone">Capstone</a>
+    <a href="#plan">Program Plan</a>
+    <a href="#practicum">Practicum</a>
+    <a href="#social-justice">Social Justice</a>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="hero-avatar">YN</div>
+  <div class="hero-text">
+    <h1>Your Name</h1>
+    <p>MS in Health Care Informatics candidate at the University of San Diego, Hahn School of Nursing and Health Sciences. Passionate about leveraging technology to improve patient outcomes and health equity.</p>
+    <span class="hero-badge">USD &middot; Hahn School of Nursing &amp; Health Sciences</span>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ── Bio ── -->
+  <section id="about">
+    <div class="section-eyebrow">About</div>
+    <div class="section-heading">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Bio
+    </div>
+    <div class="card bio-grid">
+      <div>
+        <div class="info-row">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          <span class="info-label">Program</span>
+          <span class="info-val">MS Health Care Informatics</span>
+        </div>
+        <div class="info-row">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <span class="info-label">Location</span>
+          <span class="info-val">San Diego, CA</span>
+        </div>
+        <div class="info-row">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span class="info-label">Email</span>
+          <span class="info-val"><a href="mailto:your@email.com">your@email.com</a></span>
+        </div>
+        <div class="info-row">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          <span class="info-label">LinkedIn</span>
+          <span class="info-val"><a href="https://linkedin.com/in/yourname" target="_blank">linkedin.com/in/yourname</a></span>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:13.5px; color:var(--text-secondary); line-height:1.75;">
+          Write a brief paragraph about yourself here — your background, professional goals, what drew you to health care informatics, and what you hope to achieve with this degree. This is your chance to make a strong first impression with faculty and future employers.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Resume ── -->
+  <section id="resume">
+    <div class="section-eyebrow">Professional Background</div>
+    <div class="section-heading">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Resume
+    </div>
+    <div class="card">
+      <div class="resume-block">
+        <h4>Education</h4>
+        <div class="resume-row">
+          <div>
+            <div class="resume-title">MS in Health Care Informatics &mdash; <span style="font-weight:400;color:var(--text-secondary)">In Progress</span></div>
+            <div class="resume-org">University of San Diego, Hahn School of Nursing &amp; Health Sciences</div>
+          </div>
+          <div class="resume-date">2023 &ndash; Present</div>
+        </div>
+        <div class="resume-row">
+          <div>
+            <div class="resume-title">Your Undergraduate Degree</div>
+            <div class="resume-org">Your University</div>
+          </div>
+          <div class="resume-date">Add Year</div>
+        </div>
+      </div>
+      <div class="resume-block">
+        <h4>Experience</h4>
+        <div class="resume-row">
+          <div>
+            <div class="resume-title">Your Job Title</div>
+            <div class="resume-org">Your Organization</div>
+          </div>
+          <div class="resume-date">Add Dates</div>
+        </div>
+        <div class="resume-row">
+          <div>
+            <div class="resume-title">Previous Role</div>
+            <div class="resume-org">Previous Organization</div>
+          </div>
+          <div class="resume-date">Add Dates</div>
+        </div>
+      </div>
+      <div class="resume-block">
+        <h4>Skills</h4>
+        <div class="tag-row">
+          <span class="tag">Health Informatics</span>
+          <span class="tag">EHR Systems</span>
+          <span class="tag">Data Analysis</span>
+          <span class="tag">Project Management</span>
+          <span class="tag">Interprofessional Collaboration</span>
+          <span class="tag">Add your skills</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Marquee Assignments ── -->
+  <section id="marquee">
+    <div class="section-eyebrow">Academic Work</div>
+    <div class="section-heading">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      Marquee Assignments
+    </div>
+    <div class="marquee-grid">
+      <div class="marquee-card">
+        <div class="marquee-num">Assignment 01</div>
+        <div class="marquee-title">Assignment Title Here</div>
+        <div class="marquee-desc">Brief description of the assignment, what it involved, and what you learned from completing it.</div>
+        <div class="tag-row"><span class="tag">Health Info Science</span><span class="tag">Leadership</span></div>
+      </div>
+      <div class="marquee-card">
+        <div class="marquee-num">Assignment 02</div>
+        <div class="marquee-title">Assignment Title Here</div>
+        <div class="marquee-desc">Brief description of the assignment, what it involved, and what you learned from completing it.</div>
+        <div class="tag-row"><span class="tag">Human Factors</span><span class="tag">Professionalism</span></div>
+      </div>
+      <div class="marquee-card">
+        <div class="marquee-num">Assignment 03</div>
+        <div class="marquee-title">Assignment Title Here</div>
+        <div class="marquee-desc">Brief description of the assignment, what it involved, and what you learned from completing it.</div>
+        <div class="tag-row"><span class="tag">Social &amp; Behavioral Science</span></div>
+      </div>
+      <div class="marquee-card">
+        <div class="marquee-num">Assignment 04</div>
+        <div class="marquee-title">Assignment Title Here</div>
+        <div class="marquee-desc">Brief description of the assignment, what it involved, and what you learned from completing it.</div>
+        <div class="tag-row"><span class="tag">Interprofessional Practice</span></div>
+      </div>
+      <div class="marquee-card marquee-full">
+        <div class="marquee-num">Assignment 05</div>
+        <div class="marquee-title">Assignment Title Here</div>
+        <div class="marquee-desc">Brief description of the assignment, what it involved, and what you learned from completing it.</div>
+        <div class="tag-row"><span class="tag">Health</span><span class="tag">Social &amp; Behavioral + Technology</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Capstone ── -->
+  <section id="capstone">
+    <div class="section-eyebrow">Culminating Experience</div>
+    <div class="section-heading">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+      Capstone Project
+    </div>
+    <div class="capstone-highlight">
+      <h4>Project Title Goes Here</h4>
+      <p>Describe your capstone project in 2–3 sentences. What problem did it address? What methods or tools did you use? What was the outcome or deliverable?</p>
+    </div>
+    <div class="card">
+      <div class="capstone-meta">
+        <div class="meta-item">
+          <label>Topic Area</label>
+          <span>Your Topic</span>
+        </div>
+        <div class="meta-item">
+          <label>Output Type</label>
+          <span>Literature Review / Implementation / Report</span>
+        </div>
+        <div class="meta-item">
+          <label>Course</label>
+          <span>HCIN 546 &middot; Capstone</span>
+        </div>
+      </div>
+      <div style="padding-top:12px; border-top:0.5px solid var(--border); font-size:13.5px; color:var(--text-secondary); line-height:1.7;">
+        <strong style="color:var(--text-primary); font-weight:500;">Reflection:</strong> Add a paragraph here reflecting on what you learned through this capstone experience and how it connects to your personal and professional goals in health care informatics.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Program Plan ── -->
+  <section id="plan">
+    <div class="section-eyebrow">Academic Journey</div>
+    <div class="section-heading">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Program Plan
+    </div>
+    <div class="plan-grid">
+      <div class="plan-term">
+        <div class="plan-term-label">Term 1</div>
+        <div class="plan-course">HCIN &mdash; Course Name</div>
+        <div class="plan-course">HCIN &mdash; Course Name</div>
+      </div>
+      <div class="plan-term">
+        <div class="plan-term-label">Term 2</div>
+        <div class="plan-course">HCIN &mdash; Course Name</div>
+        <div class="plan-course">HCIN &mdash; Course Name</div>
+      </div>
+      <div class="plan-term">
+        <div class="plan-term-label">Term 3</div>
+        <div class="plan-course">HCIN &mdash; Course Name</div>
+        <div class="plan-course">HCIN &mdash; Course Name</div>
+      </div>
+      <div class="plan-term">
+        <div class="plan-term-label">Term 4</div>
+        <div class="plan-course">HCIN &mdash; Course Name</div>
+        <div class="plan-course">HCIN &mdash; Course Name</div>
+      </div>
+      <div class="plan-term">
+        <div class="plan-term-label">Term 5</div>
+        <div class="plan-course">HCIN &mdash; Course Name</div>
+        <div class="plan-course">HCIN &mdash; Course Name</div>
+      </div>
+      <div class="plan-term final">
+        <div class="plan-term-label">Term 6 &middot; Final</div>
+        <div class="plan-course">HCIN 546 &mdash; Capstone</div>
+        <div class="plan-course">ePortfolio Presentation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Practicum Journal ── -->
+  <section id="practicum">
+    <div class="section-eyebrow">Field Experience</div>
+    <div class="section-heading">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Practicum Journal
+    </div>
+    <div class="card practicum-card">
+      <div class="prac-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <div>
+        <div style="font-size:15px;font-weight:600;margin-bottom:3px;">Practicum Site Name</div>
+        <div class="prac-meta">Location &middot; Start Date &ndash; End Date &middot; Total Hours</div>
+        <p style="font-size:13.5px;color:var(--text-secondary);line-height:1.7;">
+          Describe your practicum experience here — the organization, your role, the skills you applied or developed, and the key takeaways from the experience. Reflect on how this experience shaped your professional identity.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Social Justice ── -->
+  <section id="social-justice">
+    <div class="section-eyebrow">Community Engagement</div>
+    <div class="section-heading">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Social Justice &amp; Community Activism
+    </div>
+    <div class="card sj-card">
+      <div>
+        <div style="font-size:15px;font-weight:600;margin-bottom:4px;">Activity / Organization Name</div>
+        <div style="font-size:12px;color:var(--text-tertiary);margin-bottom:10px;">Date of Activity &middot; Location</div>
+        <p style="font-size:13.5px;color:var(--text-secondary);line-height:1.7;">
+          Write your reflection here — why you chose this activity, the population it impacts, what you did, and how the experience positively impacted you personally and professionally as a future health care informatics professional.
+        </p>
+      </div>
+      <div class="sj-badge">
+        <div class="check">&#10003;</div>
+        <span>Requirement<br>Met</span>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /content -->
+
+<!-- ── Footer ── -->
+<footer>
+  <strong>Your Name</strong> &middot; MS Health Care Informatics &middot; University of San Diego &middot; <strong>Class of 2025</strong>
+</footer>
+
+</body>
+</html>
